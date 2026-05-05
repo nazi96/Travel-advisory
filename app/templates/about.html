@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+
+{% block content %}
+<h1>About this Project</h1>
+
+<section class="card">
+    <h2>Project Overview</h2>
+    <p>
+        World Travel Advisory is a cloud-deployed web application that aggregates
+        official U.S. State Department travel advisories with real-time weather
+        data and curated points of interest for travelers planning trips abroad.
+    </p>
+</section>
+
+<section class="card">
+    <h2>Technology Stack</h2>
+    <ul>
+        <li><strong>Backend:</strong> Python 3.11, Flask, Pydantic, HTTPX</li>
+        <li><strong>Frontend:</strong> Server-rendered Jinja2 templates with custom CSS</li>
+        <li><strong>Cloud:</strong> Google Cloud Run, Cloud Build, Cloud Storage</li>
+        <li><strong>Data Sources:</strong> travel.state.gov, Open-Meteo</li>
+        <li><strong>DevSecOps:</strong> GitHub, GitHub Actions CI/CD, Bandit security scanning</li>
+    </ul>
+</section>
+
+<section class="card">
+    <h2>Team</h2>
+    <ul>
+        <li><strong>Nazanin Amini</strong> — Backend services & API integration</li>
+        <li><strong>Lorie Blount</strong> — Frontend UI & UX design</li>
+        <li><strong>Michael Hawkins</strong> — Cloud deployment & DevSecOps</li>
+    </ul>
+</section>
+
+<section class="card">
+    <h2>REST API Endpoints</h2>
+    <ul>
+        <li><code>GET /api/health</code> — Health check</li>
+        <li><code>GET /api/countries</code> — List all supported countries</li>
+        <li><code>GET /api/advisory/&lt;country&gt;</code> — Travel advisory</li>
+        <li><code>GET /api/weather/&lt;country&gt;</code> — Current weather</li>
+        <li><code>GET /api/report/&lt;country&gt;</code> — Aggregated report</li>
+    </ul>
+</section>
+{% endblock %}

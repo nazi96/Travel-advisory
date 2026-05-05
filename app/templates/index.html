@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Home — World Travel Advisory{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Plan your trip with confidence</h1>
+    <p class="lead">
+        Get the latest U.S. State Department travel advisory, current weather,
+        and curated recommendations for your destination — all in one place.
+    </p>
+
+    <form action="{{ url_for('main.advisory_page') }}" method="get" class="search-form">
+        <label for="country" class="visually-hidden">Country</label>
+        <select id="country" name="country" required>
+            <option value="" disabled selected>Select a destination…</option>
+            {% for c in countries %}
+                <option value="{{ c }}">{{ c }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn-primary">Get Advisory</button>
+    </form>
+
+    <p class="source-line">
+        {% if source == 'live' %}
+            ✓ Live data from <strong>travel.state.gov</strong> · {{ countries|length }} destinations
+        {% else %}
+            Cached snapshot · {{ countries|length }} destinations
+        {% endif %}
+    </p>
+</section>
+
+<section class="features">
+    <div class="feature-card">
+        <div class="feature-icon">🛂</div>
+        <h3>Official Advisories</h3>
+        <p>Levels 1–4 from travel.state.gov, the U.S. Department of State.</p>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">☀️</div>
+        <h3>Real-Time Weather</h3>
+        <p>Live conditions powered by Open-Meteo for your destination.</p>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">📍</div>
+        <h3>Top Places</h3>
+        <p>Curated attractions and lodging recommendations by country.</p>
+    </div>
+</section>
+{% endblock %}

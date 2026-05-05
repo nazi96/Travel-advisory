@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}All Advisories{% endblock %}
+
+{% block content %}
+<h1>All Travel Advisories</h1>
+<p class="lead">
+    Browse the current advisory level for every supported destination
+    ({{ advisories|length }} total).
+</p>
+
+<p class="source-line center">
+    {% if source == 'live' %}
+        ✓ Live from travel.state.gov
+    {% else %}
+        Cached snapshot
+    {% endif %}
+</p>
+
+<table class="advisory-table">
+    <thead>
+        <tr>
+            <th>Country</th>
+            <th>Level</th>
+            <th>Summary</th>
+            <th>Updated</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for a in advisories %}
+        <tr>
+            <td>{{ a.country }}</td>
+            <td>
+                <span class="level-pill"
+                      style="background:{{ a.level_color }};">
+                    Level {{ a.advisory_level }}
+                </span>
+            </td>
+            <td>{{ a.advisory_text[:120] }}{% if a.advisory_text|length > 120 %}…{% endif %}</td>
+            <td>{{ a.last_updated or "—" }}</td>
+            <td>
+                <a href="{{ url_for('main.advisory_page', country=a.country) }}"
+                   class="btn-small">View</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

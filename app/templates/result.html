@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}{{ report.country if report else 'Result' }} — Advisory{% endblock %}
+
+{% block content %}
+{% if error %}
+    <div class="alert alert-error">
+        <strong>Error:</strong> {{ error }}
+    </div>
+    <a href="{{ url_for('main.home') }}" class="btn-secondary">← Back to Home</a>
+{% else %}
+
+<div class="result-header">
+    <h1>{{ report.country }}</h1>
+    <a href="{{ url_for('main.home') }}" class="btn-secondary">← Search Another</a>
+</div>
+
+{% if report.advisory %}
+<section class="card advisory-card"
+         style="border-left: 8px solid {{ report.advisory.level_color }};">
+    <h2>Travel Advisory</h2>
+    <div class="advisory-level"
+         style="background:{{ report.advisory.level_color }};">
+        {{ report.advisory.level_label }}
+    </div>
+    <p class="advisory-text">{{ report.advisory.advisory_text }}</p>
+    {% if report.advisory.last_updated %}
+        <p class="meta">Last updated: {{ report.advisory.last_updated }}</p>
+    {% endif %}
+    {% if report.advisory.url %}
+        <p class="meta">
+            Source:
+            <a href="{{ report.advisory.url }}" target="_blank" rel="noopener">
+                travel.state.gov
+            </a>
+        </p>
+    {% endif %}
+</section>
+{% endif %}
+
+<div class="grid-two">
+    {% if report.weather %}
+    <section class="card weather-card">
+        <h2>Current Weather</h2>
+        <div class="weather-main">
+            <div class="temp">{{ report.weather.temperature_c }}°C</div>
+            <div class="temp-secondary">{{ report.weather.temperature_f }}°F</div>
+        </div>
+        <p class="weather-desc">{{ report.weather.description }}</p>
+        <ul class="weather-meta">
+            <li><strong>Location:</strong> {{ report.weather.location }}</li>
+            <li><strong>Humidity:</strong> {{ report.weather.humidity }}%</li>
+            <li><strong>Wind:</strong> {{ report.weather.wind_speed }} km/h</li>
+        </ul>
+    </section>
+    {% else %}
+    <section class="card">
+        <h2>Current Weather</h2>
+        <p class="meta">Weather data is currently unavailable.</p>
+    </section>
+    {% endif %}
+
+    <section class="card places-card">
+        <h2>Top Recommendations</h2>
+        {% if report.recommendations %}
+        <ul class="places-list">
+            {% for p in report.recommendations %}
+            <li>
+                <div class="place-name">{{ p.name }}
+                    <span class="badge badge-{{ p.category }}">{{ p.category }}</span>
+                </div>
+                {% if p.rating %}
+                    <div class="place-rating">⭐ {{ p.rating }}</div>
+                {% endif %}
+                {% if p.description %}
+                    <div class="place-desc">{{ p.description }}</div>
+                {% endif %}
+                {% if p.address %}
+                    <div class="place-address">{{ p.address }}</div>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p class="meta">Recommendations are not currently available for this destination. Try again later — we pull live data from Wikipedia.</p>
+        {% endif %}
+    </section>
+</div>
+
+<p class="meta center">Report generated at {{ report.generated_at.strftime('%Y-%m-%d %H:%M UTC') }}</p>
+
+{% endif %}
+{% endblock %}
