@@ -38,10 +38,10 @@
     const region  = regionFilter.value;
     const level   = levelFilter.value ? parseInt(levelFilter.value, 10) : null;
 
-    filtered = travelAdvisories.filter((c) => {
-      const matchesQuery  = !query || c.country.toLowerCase().includes(query) || c.region.toLowerCase().includes(query);
-      const matchesRegion = !region || c.region === region;
-      const matchesLevel  = level === null ? (activeLevel === null || c.level === activeLevel) : c.level === level;
+    filtered = travelAdvisories.filter((advisory) => {
+      const matchesQuery  = !query || advisory.country.toLowerCase().includes(query) || advisory.region.toLowerCase().includes(query);
+      const matchesRegion = !region || advisory.region === region;
+      const matchesLevel  = level === null ? (activeLevel === null || advisory.level === activeLevel) : advisory.level === level;
       return matchesQuery && matchesRegion && matchesLevel;
     });
 
