@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Up-to-date travel advisories, safety tips, health information, and emergency contacts for destinations around the world." />
+  <title>Travel Advisory – Global Safety Information</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ── Header ──────────────────────────────────────── -->
+  <header>
+    <h1>✈️ Travel <span>Advisory</span></h1>
+    <p>Current safety levels, health guidance, and essential information for travellers worldwide.</p>
+
+    <!-- Advisory level legend / quick-filter -->
+    <div class="legend" role="group" aria-label="Filter by advisory level">
+      <button class="legend-item" data-level="1" aria-pressed="false">
+        <span class="legend-dot" style="background:#27ae60;"></span>
+        Level 1 – Normal
+      </button>
+      <button class="legend-item" data-level="2" aria-pressed="false">
+        <span class="legend-dot" style="background:#f39c12;"></span>
+        Level 2 – Caution
+      </button>
+      <button class="legend-item" data-level="3" aria-pressed="false">
+        <span class="legend-dot" style="background:#e67e22;"></span>
+        Level 3 – Reconsider
+      </button>
+      <button class="legend-item" data-level="4" aria-pressed="false">
+        <span class="legend-dot" style="background:#c0392b;"></span>
+        Level 4 – Do Not Travel
+      </button>
+    </div>
+  </header>
+
+  <!-- ── Controls ─────────────────────────────────────── -->
+  <section class="controls" aria-label="Search and filter">
+    <div class="search-wrapper">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input
+        type="search"
+        id="searchInput"
+        placeholder="Search country or region…"
+        aria-label="Search by country or region"
+        autocomplete="off"
+      />
+    </div>
+
+    <select id="regionFilter" aria-label="Filter by region">
+      <!-- populated by script -->
+    </select>
+
+    <select id="levelFilter" aria-label="Filter by advisory level">
+      <option value="">All Levels</option>
+      <option value="1">Level 1 – Normal Precautions</option>
+      <option value="2">Level 2 – Increased Caution</option>
+      <option value="3">Level 3 – Reconsider Travel</option>
+      <option value="4">Level 4 – Do Not Travel</option>
+    </select>
+
+    <p class="results-count" id="resultsCount" aria-live="polite"></p>
+  </section>
+
+  <!-- ── Cards Grid ────────────────────────────────────── -->
+  <main>
+    <div class="cards-grid" id="cardsGrid" role="list">
+      <!-- rendered by script.js -->
+    </div>
+  </main>
+
+  <!-- ── Detail Modal ──────────────────────────────────── -->
+  <div
+    class="modal-overlay"
+    id="modalOverlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+  >
+    <div class="modal" id="modalContent">
+      <!-- populated by script.js -->
+    </div>
+  </div>
+
+  <!-- ── Footer ────────────────────────────────────────── -->
+  <footer>
+    <p>
+      Travel advisories are for informational purposes only.
+      Always consult your government's official travel portal before travelling.
+      &nbsp;|&nbsp;
+      <a href="https://travel.state.gov" target="_blank" rel="noopener noreferrer">U.S. State Dept</a>
+      &nbsp;·&nbsp;
+      <a href="https://www.gov.uk/foreign-travel-advice" target="_blank" rel="noopener noreferrer">UK FCDO</a>
+      &nbsp;·&nbsp;
+      <a href="https://www.smartraveller.gov.au" target="_blank" rel="noopener noreferrer">Smartraveller (AU)</a>
+    </p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
